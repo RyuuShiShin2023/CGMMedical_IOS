@@ -50,6 +50,7 @@ class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate {
     
     func webView(_ webView: WKWebView, createWebViewWith configuration: WKWebViewConfiguration, for navigationAction: WKNavigationAction, windowFeatures: WKWindowFeatures) -> WKWebView? {
         let url = navigationAction.request.url?.absoluteString
+        print("url : " + (url ?? "nil"))
         if (url != nil && url!.hasSuffix(".pdf")) {
             webView.load(navigationAction.request)
         }
@@ -62,6 +63,42 @@ class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate {
     
     func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
         setNavigationBtnsStatus()
+    }
+    
+    func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction) async -> WKNavigationActionPolicy {
+        print("liu navigationAction : " + navigationAction.description)
+        let url = navigationAction.request.url
+        if (url == nil) {
+            return WKNavigationActionPolicy.allow
+        }
+        if (UIApplication.shared.canOpenURL(navigationAction.request.url!)) {
+            if (navigationAction.navigationType == WKNavigationType.linkActivated) {
+                // 打开下载程序的网页
+                if (url!.absoluteString.starts(with: "https://apps.apple.com/cn/app/") || url!.absoluteString.hasSuffix(".apk")) {
+                    await UIApplication.shared.open(navigationAction.request.url!)
+                    return WKNavigationActionPolicy.cancel
+                }
+            } else {
+                if (url!.absoluteString.starts(with: "weixin://")) {
+                    
+                    return WKNavigationActionPolicy.cancel
+                }
+            }
+        } else {
+            if (url!.absoluteString.starts(with: "weixin://")) {
+                UIApplication.shared.open(url!, options: [.universalLinksOnly: false], completionHandler: { success in
+                    if (!success) {
+                        let alertVC = UIAlertController.init(title: "提示", message: "未检测到微信客户端，请安装后重试", preferredStyle: .alert)
+                        let sureAction = UIAlertAction.init(title: "确定", style: .default) { action in
+                            self.navigationController?.popToRootViewController(animated: true)
+                        }
+                        alertVC.addAction(sureAction)
+                        self.present(alertVC, animated: true)
+                    }
+                })
+            }
+        }
+        return WKNavigationActionPolicy.allow
     }
     
     @IBAction func backClick(_ sender: Any) {
