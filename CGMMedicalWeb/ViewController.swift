@@ -9,7 +9,7 @@ import UIKit
 import WebKit
 
 class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate {
-
+    
     @IBOutlet weak var navigationBar: UIStackView!
     @IBOutlet weak var backBtn: UIButton!
     @IBOutlet weak var forwardBtn: UIButton!
@@ -71,16 +71,12 @@ class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate {
         if (url == nil) {
             return WKNavigationActionPolicy.allow
         }
-        if (UIApplication.shared.canOpenURL(navigationAction.request.url!)) {
-            if (navigationAction.navigationType == WKNavigationType.linkActivated) {
+        
+        if (navigationAction.navigationType == WKNavigationType.linkActivated) {
+            if (UIApplication.shared.canOpenURL(navigationAction.request.url!)) {
                 // 打开下载程序的网页
                 if (url!.absoluteString.starts(with: "https://apps.apple.com/cn/app/") || url!.absoluteString.hasSuffix(".apk")) {
                     await UIApplication.shared.open(navigationAction.request.url!)
-                    return WKNavigationActionPolicy.cancel
-                }
-            } else {
-                if (url!.absoluteString.starts(with: "weixin://")) {
-                    
                     return WKNavigationActionPolicy.cancel
                 }
             }
