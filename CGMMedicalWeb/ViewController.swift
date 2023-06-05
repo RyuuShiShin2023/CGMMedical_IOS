@@ -75,7 +75,7 @@ class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate {
         if (navigationAction.navigationType == WKNavigationType.linkActivated) {
             if (UIApplication.shared.canOpenURL(navigationAction.request.url!)) {
                 // 打开下载程序的网页
-                if (url!.absoluteString.starts(with: "https://apps.apple.com/cn/app/") || url!.absoluteString.hasSuffix(".apk")) {
+                if (url!.absoluteString.contains("apps.apple.com/cn/app/") || url!.absoluteString.hasSuffix(".apk")) {
                     await UIApplication.shared.open(navigationAction.request.url!)
                     return WKNavigationActionPolicy.cancel
                 }
@@ -85,6 +85,17 @@ class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate {
                 UIApplication.shared.open(url!, options: [.universalLinksOnly: false], completionHandler: { success in
                     if (!success) {
                         let alertVC = UIAlertController.init(title: "提示", message: "未检测到微信客户端，请安装后重试", preferredStyle: .alert)
+                        let sureAction = UIAlertAction.init(title: "确定", style: .default) { action in
+                            self.navigationController?.popToRootViewController(animated: true)
+                        }
+                        alertVC.addAction(sureAction)
+                        self.present(alertVC, animated: true)
+                    }
+                })
+            } else if (url!.absoluteString.starts(with: "alipay://alipayclient")) {
+                UIApplication.shared.open(url!, options: [.universalLinksOnly: false], completionHandler: { success in
+                    if (!success) {
+                        let alertVC = UIAlertController.init(title: "提示", message: "未检测到支付宝客户端，请安装后重试", preferredStyle: .alert)
                         let sureAction = UIAlertAction.init(title: "确定", style: .default) { action in
                             self.navigationController?.popToRootViewController(animated: true)
                         }
