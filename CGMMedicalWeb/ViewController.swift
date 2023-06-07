@@ -15,8 +15,10 @@ class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate {
     @IBOutlet weak var forwardBtn: UIButton!
     @IBOutlet weak var homeBtn: UIButton!
     @IBOutlet weak var refreshBtn: UIButton!
+    @IBOutlet weak var progressView: UIProgressView!
     
-    let webView = WKWebView()
+    private let webView = WKWebView()
+    private var observation: NSKeyValueObservation? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,7 +29,7 @@ class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate {
         webView.uiDelegate = self
         self.view.addSubview(webView)
         
-        let topConstraint = NSLayoutConstraint(item: webView, attribute: NSLayoutConstraint.Attribute.top, relatedBy: NSLayoutConstraint.Relation.equal, toItem: self.view.safeAreaLayoutGuide, attribute: NSLayoutConstraint.Attribute.top, multiplier: 1, constant: 0)
+        let topConstraint = NSLayoutConstraint(item: webView, attribute: NSLayoutConstraint.Attribute.top, relatedBy: NSLayoutConstraint.Relation.equal, toItem: progressView, attribute: NSLayoutConstraint.Attribute.bottom, multiplier: 1, constant: 0)
         let leadingConstraint = NSLayoutConstraint(item: webView, attribute: NSLayoutConstraint.Attribute.leading, relatedBy: NSLayoutConstraint.Relation.equal, toItem: self.view, attribute: NSLayoutConstraint.Attribute.leading, multiplier: 1, constant: 0)
         let trailingConstraint = NSLayoutConstraint(item: webView, attribute: NSLayoutConstraint.Attribute.trailing, relatedBy: NSLayoutConstraint.Relation.equal, toItem: self.view, attribute: NSLayoutConstraint.Attribute.trailing, multiplier: 1, constant: 0)
         let bottomConstraint = NSLayoutConstraint(item: webView, attribute: NSLayoutConstraint.Attribute.bottom, relatedBy: NSLayoutConstraint.Relation.equal, toItem: navigationBar, attribute: NSLayoutConstraint.Attribute.top, multiplier: 1, constant: 0)
@@ -35,6 +37,10 @@ class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate {
         NSLayoutConstraint.activate([topConstraint, leadingConstraint, trailingConstraint, bottomConstraint])
         
         setNavigationBtnsStatus()
+    }
+    
+    deinit {
+        observation = nil
     }
     
     func setNavigationBtnsStatus() {
@@ -46,6 +52,10 @@ class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate {
         let url = NSURL(string: "https://www.cgmmedical.jp")
         let request = NSURLRequest(url: url! as URL)
         webView.load(request as URLRequest)
+        observation = webView.observe(\.estimatedProgress, options: [.new]) { _, _ in
+            self.progressView.progress = Float(self.webView.estimatedProgress)
+            self.progressView.isHidden = self.progressView.progress == 1;
+        }
     }
     
     func webView(_ webView: WKWebView, createWebViewWith configuration: WKWebViewConfiguration, for navigationAction: WKNavigationAction, windowFeatures: WKWindowFeatures) -> WKWebView? {

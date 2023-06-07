@@ -17,6 +17,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <progressView hidden="YES" opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="eGw-LV-xT8">
+                                <rect key="frame" x="0.0" y="59" width="393" height="4"/>
+                            </progressView>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Yqr-TC-YHb" userLabel="Navigation Bar">
                                 <rect key="frame" x="0.0" y="757.33333333333337" width="393" height="60.666666666666629"/>
                                 <subviews>
@@ -74,9 +77,12 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="eGw-LV-xT8" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="Pwo-Xs-DDi"/>
                             <constraint firstItem="Yqr-TC-YHb" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Qzv-it-hQy"/>
+                            <constraint firstItem="eGw-LV-xT8" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="WH0-KJ-6Jn"/>
                             <constraint firstItem="Yqr-TC-YHb" firstAttribute="height" secondItem="6Tk-OE-BBY" secondAttribute="height" multiplier="0.08" id="gCd-cz-ZRL"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Yqr-TC-YHb" secondAttribute="bottom" id="jZA-j3-Q1U"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="eGw-LV-xT8" secondAttribute="trailing" id="s6b-9h-MRV"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Yqr-TC-YHb" secondAttribute="trailing" id="tBu-18-HNG"/>
                         </constraints>
                     </view>
@@ -85,6 +91,7 @@
                         <outlet property="forwardBtn" destination="VP9-aQ-eNH" id="eXz-qH-Bze"/>
                         <outlet property="homeBtn" destination="lH6-C7-tBn" id="E9u-ke-PWj"/>
                         <outlet property="navigationBar" destination="Yqr-TC-YHb" id="14k-W1-7mJ"/>
+                        <outlet property="progressView" destination="eGw-LV-xT8" id="K1Z-gs-lVb"/>
                         <outlet property="refreshBtn" destination="Yd2-ay-R9q" id="Du9-Xd-79F"/>
                     </connections>
                 </viewController>
