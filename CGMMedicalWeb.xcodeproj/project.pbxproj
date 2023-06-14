@@ -286,12 +286,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_TEAM = R99JYYW6C9;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = CGMMedicalWeb/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "CGM Medical Web";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.business";
+				INFOPLIST_KEY_NSCameraUsageDescription = "APP需要您的同意，才能访问相机进行拍摄头像，如禁止将无法拍照拍摄图片无法更新信息";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "APP需要您的同意，才能访问相册进行选择照片上传/发布信息，如禁止将无法选择照片上传/发布信息";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = Main.storyboard;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -301,7 +303,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2;
+				MARKETING_VERSION = 1.4;
 				PRODUCT_BUNDLE_IDENTIFIER = jp.co.cgm.CGMMedicalWeb;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -316,12 +318,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_TEAM = R99JYYW6C9;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = CGMMedicalWeb/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "CGM Medical Web";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.business";
+				INFOPLIST_KEY_NSCameraUsageDescription = "APP需要您的同意，才能访问相机进行拍摄头像，如禁止将无法拍照拍摄图片无法更新信息";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "APP需要您的同意，才能访问相册进行选择照片上传/发布信息，如禁止将无法选择照片上传/发布信息";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = Main.storyboard;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -331,7 +335,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2;
+				MARKETING_VERSION = 1.4;
 				PRODUCT_BUNDLE_IDENTIFIER = jp.co.cgm.CGMMedicalWeb;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;

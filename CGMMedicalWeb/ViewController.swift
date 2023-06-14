@@ -69,6 +69,7 @@ class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate {
     
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         setNavigationBtnsStatus()
+        webView.evaluateJavaScript("document.getElementsByClassName('head_download_hbotitem')[1].style.display='none'")
     }
     
     func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
@@ -85,7 +86,8 @@ class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate {
         if (navigationAction.navigationType == WKNavigationType.linkActivated) {
             if (UIApplication.shared.canOpenURL(navigationAction.request.url!)) {
                 // 打开下载程序的网页
-                if (url!.absoluteString.contains("apps.apple.com/cn/app/") || url!.absoluteString.hasSuffix(".apk")) {
+                if (url!.absoluteString.contains("apps.apple.com/cn/app/") ||
+                    url!.absoluteString == "https://www.cgmgroup.jp/index/index_jp/download.html") {
                     await UIApplication.shared.open(navigationAction.request.url!)
                     return WKNavigationActionPolicy.cancel
                 }
