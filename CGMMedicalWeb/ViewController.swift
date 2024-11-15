@@ -49,7 +49,7 @@ class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate {
     }
     
     func showHomePage() {
-        let url = NSURL(string: "https://www.cgmmedical.jp")
+        let url = NSURL(string: "https://www.cgm-medical.jp/")
         let request = NSURLRequest(url: url! as URL)
         webView.load(request as URLRequest)
         observation = webView.observe(\.estimatedProgress, options: [.new]) { _, _ in
